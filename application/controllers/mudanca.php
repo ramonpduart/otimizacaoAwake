@@ -7,6 +7,8 @@ class Mudanca extends CI_Controller {
 	{
 		$this->load->model ( 'MCaixa', '', TRUE );
 		$data['caixas'] = $this->MCaixa->listCaixas();
+		$this->load->model ( 'MVeiculo', '', TRUE );
+		$data['veiculos'] = $this->MVeiculo->listVeiculos();
 		$this->load->view('form_mudanca',$data);
 	}
 
@@ -21,12 +23,13 @@ class Mudanca extends CI_Controller {
 		$qtd = 0;
 		$arr  = array();
 
-		for($i = 0; $i < count($caixas['data']); $i = $i+2) {
+		for($i = 0; $i < count($caixas['data'])-1; $i = $i+2) {
 			$array  = array('idCaixa' => $caixas['data'][$i]['value'],
 							'qtdCaixa' => $caixas['data'][$i+1]['value'] );
 			array_push($arr,$array);
 		}
-
+		$idVeiculo = $caixas['data'][count($caixas['data'])-1]['value'];
+		
 		foreach ($arr as $caixa) {
 			$infoCaixa = $this->MCaixa->getCaixa($caixa['idCaixa']);
 			$infoCaixa = $infoCaixa->result();
@@ -35,7 +38,7 @@ class Mudanca extends CI_Controller {
 			$comprimentoTotal += $infoCaixa[0]->comprimento* $caixa['qtdCaixa'];
 			$larguraTotal += $infoCaixa[0]->largura* $caixa['qtdCaixa'];
 		}
-		$infoVeiculo = $this->MVeiculo->getVeiculo(1);
+		$infoVeiculo = $this->MVeiculo->getVeiculo($idVeiculo);
 		$infoVeiculo = $infoVeiculo->result();
 		$qtdVeiculos = $capacidadeTotal / $infoVeiculo[0]->capacidade;
 		echo ceil($qtdVeiculos);

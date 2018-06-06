@@ -5,7 +5,9 @@ class Caixa extends CI_Controller {
 	
 	public function index()
 	{
-		$this->load->view('form_caixa');
+		$this->load->model ( 'MCaixa', '', TRUE );
+		$data['caixas'] = $this->MCaixa->listCaixas();
+		$this->load->view('form_caixa',$data);
 	}
 
 	public function add() {

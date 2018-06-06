@@ -9,6 +9,7 @@ $(document).ready(function () {
                 data: {data:data},
 				success: function (data) {
 					$('#resultado').show();
+					$('#rst').html('');
 					$('#rst').append('<h2>Serão necessário(s) <b style="color: #23527c">' + data + '</b> caminhões.</h2>');
 				},
 				error: function () {

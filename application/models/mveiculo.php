@@ -1,10 +1,14 @@
 <?php
 class MVeiculo extends CI_Model {
 
-	function addViculo($data) {
-		//$data['VALSERV'] = floatval($data['VALSERV']);
+	function addVeiculo($data) {
+		$data['capacidade'] = floatval($data['capacidade']);
+		$data['altura'] = floatval($data['altura']);
+		$data['comprimento'] = floatval($data['comprimento']);
+		$data['largura'] = floatval($data['largura']);
 		$this->db->insert ( 'veiculo', $data );
 	}
+
 	function listVeiculos() {
 		return $this->db->get( 'veiculo' );
 	}

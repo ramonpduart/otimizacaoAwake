@@ -176,6 +176,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <div id="ultCaixa">
                       </div>
                       <hr/>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Veículo <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select type="text" id="idVeiculo" name="idVeiculo" required="required" class="form-control col-md-7 col-xs-12">
+                            <option value=""> Selecione </option>
+                            <?php foreach ($veiculos->result() as $veiculo) { ?>
+                              <option value="<?= $veiculo->id ?>"> <?= $veiculo->nome ?> </option>
+                           <?php }  ?>
+                          </select>
+                        </div>
+                      </div>
+                    </hr>
                       <div class="col-md-6 col-sm-6 col-xs-12" style="float: right;">
                         <a type="button" href="#" id="addCaixa" class="btn btn-light">Adicionar mais tipos de caixas</a>
                       </div>

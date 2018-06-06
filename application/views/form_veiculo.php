@@ -126,52 +126,111 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
+                    <h2>Lista de veículos</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+
+                  <div class="x_content">
+
+                    <p> Veículos <code>disponíveis</code> para transporte.</p>
+
+                    <div class="table-responsive">
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+                            <th>
+                              <input type="checkbox" id="check-all" class="flat">
+                            </th>
+                            <th class="column-title">Código </th>
+                            <th class="column-title">Modelo </th>
+                            <th class="column-title">Descrição </th>
+                            <th class="column-title">Capacidade </th>
+                            <th class="column-title">Altura </th>
+                            <th class="column-title">Largura </th>
+                            <th class="column-title">Comprimento </th>
+                            </th>
+                            <th class="bulk-actions" colspan="7">
+                              <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                            </th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <?php foreach ($veiculos->result() as $veiculo) { ?>
+                            <tr class="even pointer">
+                              <td class="a-center ">
+                                <input type="checkbox" name="table_records" class="flat">
+                              </td>
+                                <td class=""><?= $veiculo->id ?></td>
+                                <td class=""><?= $veiculo->nome ?></td>
+                                <td class=""><?= $veiculo->descricao ?></td>
+                                <td class=""><?= $veiculo->capacidade ?></td>
+                                <td class=""><?= $veiculo->altura ?></td>
+                                <td class=""><?= $veiculo->largura ?></td>
+                                <td class=""><?= $veiculo->comprimento ?></td>
+                              </td>
+                          </tr>
+                          <?php } ?>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
                     <h2>Cadastro de veículos </h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     <br />
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                    <form id="form-veiculo" action="<?php echo base_url('/veiculo/add') ?>" method="POST" data-parsley-validate class="form-horizontal form-label-left">
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Modelo <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="first-name" name="nome" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Descrição <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="last-name" name="descricao" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Capacidade</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
+                          <input id="middle-name" name="capacidade" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Altura<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                          <input id="birthday" name="altura" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
                         </div>
                       </div>
                        <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Largura<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                          <input id="birthday" name="largura" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
                         </div>
                       </div>
                        <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Comprimento<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                          <input id="birthday" name="comprimento" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
                         </div>
                       </div>
                       <div class="ln_solid"></div>
